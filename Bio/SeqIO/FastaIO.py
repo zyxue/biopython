@@ -61,7 +61,11 @@ def SimpleFastaParser(handle):
             if line[0] == ">":
                 break
             lines.append(line.rstrip())
-            line = handle.readline()
+            try:
+                line = handle.readline()
+            except StopIteration:
+                line = ''
+                break
 
         # Remove trailing whitespace, and any internal spaces
         # (and any embedded \r which are possible in mangled files
